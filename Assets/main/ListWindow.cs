@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using System.Collections;
 
 public class ListWindow : MonoBehaviour 
@@ -79,7 +79,7 @@ public class ListWindow : MonoBehaviour
             {
                 GUILayout.Label("<color=#498496><size=25>" + mTitle + "</size></color>", "titlelabel");
                 GUILayout.FlexibleSpace();
-                if (GUILayout.Button("»∑∂®", "graybutton"))
+                if (GUILayout.Button("Á°ÆÂÆö", "graybutton"))
                 {
                     HideWindow();
                 }
@@ -110,7 +110,7 @@ public class ListWindow : MonoBehaviour
                             GUILayout.BeginVertical();
                             {
                                 GUILayout.Label("<color=black><size=28>" + CSVReader.getString(mCSV, i.ToString(), "title") + "</size></color>");
-                                GUILayout.Label("<color=#989898><size=20>" + CSVReader.getString(mCSV, i.ToString(), "cost") + "Ω‹±“" + "</size></color>");
+                                GUILayout.Label("<color=#989898><size=20>" + CSVReader.getString(mCSV, i.ToString(), "cost") + "Êù∞Â∏Å" + "</size></color>");
                             }
                             GUILayout.EndVertical();
 
@@ -120,10 +120,10 @@ public class ListWindow : MonoBehaviour
                             {
                                 GUILayout.FlexibleSpace();
                                 int count = PlayerPrefs.GetInt(mCSV + CSVReader.getString(mCSV, i.ToString(), "name"), 0);
-                                GUILayout.Label("<color=#989898><size=16> £”‡" + count + "∏ˆ" + "</size></color>");
+                                GUILayout.Label("<color=#989898><size=16>Ââ©‰Ωô" + count + "‰∏™" + "</size></color>");
                                 if (count <= 0)
                                 {
-                                    if (GUILayout.Button("π∫¬Ú", "graybutton"))
+                                    if (GUILayout.Button("Ë¥≠‰π∞", "graybutton"))
                                     {
                                         OperateObject obj = new GameObject().AddComponent<OperateObject>();
                                         obj.init(i);
@@ -134,7 +134,7 @@ public class ListWindow : MonoBehaviour
                                 }
                                 else
                                 {
-                                    if (GUILayout.Button(" π”√", "graybutton"))
+                                    if (GUILayout.Button("‰ΩøÁî®", "graybutton"))
                                     {
                                         OperateObject obj = new GameObject().AddComponent<OperateObject>();
                                         obj.init(i);

@@ -1,4 +1,4 @@
-using UnityEngine;
+锘縰sing UnityEngine;
 using System.Collections;
 
 public class SayPop : MonoBehaviour 
@@ -30,7 +30,7 @@ public class SayPop : MonoBehaviour
     void getCustomAd()
     {
 #if UNITY_EDITOR
-        retGetCustomAd("dafkjlaskdfjlkv|百度浏览器|很好用的浏览器呵呵呵|50");
+        retGetCustomAd("dafkjlaskdfjlkv|鐧惧害娴忚鍣▅寰堝ソ鐢ㄧ殑娴忚鍣ㄥ懙鍛靛懙|50");
 #elif UNITY_ANDROID
         GameUtils.Call("getCustomAd");
 #endif
@@ -63,14 +63,14 @@ public class SayPop : MonoBehaviour
                     GUILayout.Label("<color=black>" + mAdStr[2] + "</color>");
                 }
                 GUILayout.EndVertical();
-                if (GUILayout.Button("详情", "graybutton"))
+                if (GUILayout.Button("璇︽儏", "graybutton"))
                 {
                     GameUtils.Call("getCustomAdDesc", mAdStr[0]);
                     closePop();
                 }
             }
             GUILayout.EndHorizontal();
-            GUILayout.Label("<color=black>主人,安装" + mAdStr[1] + "就能获得" + mAdStr[3] + "杰币!</color>");
+            GUILayout.Label("<color=black>涓讳汉,瀹夎" + mAdStr[1] + "灏辫兘鑾峰緱" + mAdStr[3] + "鏉板竵!</color>");
         }
         GUILayout.EndArea();
     }

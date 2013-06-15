@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using System.Collections;
 
 public class ThingWindow : MonoBehaviour 
@@ -96,7 +96,7 @@ public class ThingWindow : MonoBehaviour
             {
                 GUILayout.Label("<color=#498496><size=25>" + mTitle + "</size></color>", "titlelabel");
                 GUILayout.FlexibleSpace();
-                if (GUILayout.Button("»∑∂®", "graybutton"))
+                if (GUILayout.Button("Á°ÆÂÆö", "graybutton"))
                 {
                     HideWindow();
                 }
@@ -127,7 +127,7 @@ public class ThingWindow : MonoBehaviour
                             GUILayout.BeginVertical();
                             {
                                 GUILayout.Label("<color=black><size=28>" + CSVReader.getString(mCSV, i.ToString(), "title") + "</size></color>");
-                                GUILayout.Label("<color=#989898><size=20>" + CSVReader.getString(mCSV, i.ToString(), "cost") + "Ω‹±“" + "</size></color>");
+                                GUILayout.Label("<color=#989898><size=20>" + CSVReader.getString(mCSV, i.ToString(), "cost") + "Êù∞Â∏Å" + "</size></color>");
                             }
                             GUILayout.EndVertical();
 
@@ -138,8 +138,8 @@ public class ThingWindow : MonoBehaviour
                                 GUILayout.FlexibleSpace();
                                 if ((mBuyThingFlag & (1 << i)) == 0)
                                 {
-                                    GUILayout.Label("<color=#989898><size=16>…–Œ¥π∫¬Ú" + "</size></color>");
-                                    if (GUILayout.Button("π∫¬Ú", "graybutton"))
+                                    GUILayout.Label("<color=#989898><size=16>Â∞öÊú™Ë¥≠‰π∞" + "</size></color>");
+                                    if (GUILayout.Button("Ë¥≠‰π∞", "graybutton"))
                                     {
                                         if (StateInfo.getSingleton().stateMoney.onValueChange(-CSVReader.getInt(mCSV, i.ToString(), "cost"), true))
                                         {

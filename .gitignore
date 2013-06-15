@@ -231,3 +231,5 @@ pip-log.txt
 *.csproj
 *.unityproj
 *.sln
+
+*.userprefs
