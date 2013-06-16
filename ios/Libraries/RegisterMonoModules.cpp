@@ -18,11 +18,6 @@ extern "C"
 	extern gpointer*	mono_aot_module_mscorlib_info; // mscorlib.dll
 #endif // !(TARGET_IPHONE_SIMULATOR)
 	void	_Feedback();
-	void	_StartLookup();
-	void	_GetLookupStatus();
-	void	_GetServiceCount();
-	void	_Stop();
-	void	_GetServiceName();
 }
 void RegisterMonoModules()
 {
@@ -36,11 +31,6 @@ void RegisterMonoModules()
 	mono_aot_register_module(mono_aot_module_mscorlib_info);
 
 	mono_dl_register_symbol("_Feedback", (void*)&_Feedback);
-	mono_dl_register_symbol("_StartLookup", (void*)&_StartLookup);
-	mono_dl_register_symbol("_GetLookupStatus", (void*)&_GetLookupStatus);
-	mono_dl_register_symbol("_GetServiceCount", (void*)&_GetServiceCount);
-	mono_dl_register_symbol("_Stop", (void*)&_Stop);
-	mono_dl_register_symbol("_GetServiceName", (void*)&_GetServiceName);
 #endif // !(TARGET_IPHONE_SIMULATOR)
 }
 
