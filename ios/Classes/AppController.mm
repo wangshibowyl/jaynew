@@ -12,6 +12,7 @@
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
 #import <OpenGLES/ES2/glext.h>
+#import "MobClick.h"
 
 #include <mach/mach_time.h>
 
@@ -447,6 +448,8 @@ void UnityInitTrampoline()
 
     [self performSelector:@selector(startUnity:) withObject:application afterDelay:0];
 
+    [MobClick startWithAppkey:UMENG_APPKEY];
+    
     return NO;
 }
 
