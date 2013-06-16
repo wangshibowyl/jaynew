@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameUtils 
 {
-#if UNITY_EDITOR
+#if UNITY_EDITOR1
     static public void Call(string methodName, params string[] args)
     {
         string param = "";
@@ -68,6 +68,10 @@ public class GameUtils
 				GameSocial.Instance.AddAchievementProgress("jaysayhungry_wohenmang",100.0f);
 				break;
 			}
+		}
+		else if (methodName == "feedback")
+		{
+			IOSUtils.Feedback();
 		}
     }
 #elif UNITY_ANDROID
