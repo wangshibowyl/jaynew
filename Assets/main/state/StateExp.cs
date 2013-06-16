@@ -96,11 +96,18 @@ public class StateExp : StateBase
                 mValue = mMaxValue - 1;
             }
         }
-        GameUtils.Call("updateLeaderboard", "0",(StateInfo.getSingleton().mLevel * 100000 + mValue).ToString());
-        if (showPop)
+		if (showPop && change != 0)
         {
-            //StatePop.addStatePop(mContent, (int)(value - lastJiedu), Yang.getSingle().transform);
+            if (change > 0)
+            {
+                StatePop.getSingleton().AddPop("<color=#518497><size=20>" + mTitle + "+" + change.ToString() + "</size></color>");
+            }
+            else
+            {
+                StatePop.getSingleton().AddPop("<color=red><size=20>" + mTitle + change.ToString() + "</size></color>");
+            }
         }
+        GameUtils.Call("updateLeaderboard", "0",(StateInfo.getSingleton().mLevel * 100000 + mValue).ToString());
         StateInfo.getSingleton().needSaveState = true;
 		return true;
 	}

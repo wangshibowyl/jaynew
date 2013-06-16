@@ -73,6 +73,7 @@ public class StateMoney : StateBase
                 GameUtils.Call("updateAchievement", "1");
             }
 			base.onValueChange(change,showPop);
+			GameUtils.Call("updateLeaderboard", "1",mValue.ToString());
 			return true;
 		}
     }

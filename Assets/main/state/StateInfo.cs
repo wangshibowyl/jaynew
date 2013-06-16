@@ -87,6 +87,9 @@ public class StateInfo : MonoBehaviour
 	{
 		PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
+#if UNITY_IOS
+		GameSocial.Instance.ResetAchievements();
+#endif
         //needSaveState = true;
 		LoadState();
 	}

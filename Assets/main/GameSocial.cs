@@ -45,6 +45,7 @@ public class GameSocial
 				}
 				else
 				{
+					MainUI.getSingleton().SetTitle("||aerror");
 					Debug.Log ("Failed to authenticate");
 				}
 			});
@@ -74,8 +75,8 @@ public class GameSocial
 	{
 		if(IsUserAuthenticated())
 		{
-			GameCenterPlatform.ShowLeaderboardUI(leaderboardID,TimeScope.AllTime);
-			//Social.ShowLeaderboardUI();
+			//GameCenterPlatform.ShowLeaderboardUI(leaderboardID,TimeScope.AllTime);
+			Social.ShowLeaderboardUI();
 		}
 	}	
 	public bool AddAchievementProgress(string achievementID, float percentageToAdd)
@@ -90,6 +91,18 @@ public class GameSocial
 			return ReportAchievementProgress(achievementID, percentageToAdd);
 		}
 	}	
+	
+	public void ReportScore ( string leaderboardID,long score) 
+	{
+		if(Social.localUser.authenticated)
+		{
+	    	Social.ReportScore (score, leaderboardID, success => 
+			{
+	        	Debug.Log((success ? "Reported score successfully " : "Failed to report score ")+leaderboardID);
+	    	});
+		}
+	}
+	
 	public bool ReportAchievementProgress(string achievementID, float progressCompleted)
 	{
 		if(Social.localUser.authenticated)

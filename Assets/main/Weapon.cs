@@ -23,6 +23,7 @@ public class Weapon : MonoBehaviour
 
     public void changeWeapon(string weaponStr,float deleteTime)
     {
+		CancelInvoke();
         if (mWeaponObj)
         {
             Destroy(mWeaponObj);

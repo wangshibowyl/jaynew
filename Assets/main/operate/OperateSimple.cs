@@ -21,14 +21,20 @@ public class OperateSimple : OperateBase
 		{
             case OPERATE_ID.OI_LEADERBOARD:
 			{
+#if UNITY_ANDROID
                 GameUtils.Call("leaderboard");
-				//GameSocial.Instance.ShowLeaderboardUI("jaysayhungry_exp");
+#elif UNITY_IOS
+				GameSocial.Instance.ShowLeaderboardUI("jaysayhungry_exp");
+#endif
 				break;
 			}
             case OPERATE_ID.OI_ACHIEVEMENT:
             {
+#if UNITY_ANDROID
                 GameUtils.Call("achievement");
-				//GameSocial.Instance.ShowLeaderboardUI("jaysayhungry_exp");
+#elif UNITY_IOS
+				GameSocial.Instance.ShowAchievementUI();
+#endif
                 break;
             }
             case OPERATE_ID.OI_RESET:
@@ -60,7 +66,6 @@ public class OperateSimple : OperateBase
             {
                 GameUtils.Call("appbbs");
                 GameUtils.Call("incrementAchievement", "4");
-				//GameSocial.Instance.ShowLeaderboardUI("jaysayhungry_exp");
                 break;
             }
             case OPERATE_ID.OI_CHECKUPDATE:

@@ -35,8 +35,8 @@ public class MainUI : MonoBehaviour
 		GameSocial.Instance.Initialize();
 #else
         statusBarHeight = Screen.height * 0.09f;
+		mTitle = PlayerPrefs.GetString("mTitle", "");
 #endif
-        mTitle = PlayerPrefs.GetString("mTitle", "");
     }
 	
 	public void SetTitle(string title)
@@ -68,7 +68,8 @@ public class MainUI : MonoBehaviour
                     GUILayout.FlexibleSpace();
 					//GUILayout.BeginHorizontal();
 					//{
-                        if (mTitle == "")
+					#if UNITY_ANDROID
+					    if (mTitle == "")
                         {
                             GUI.enabled = !mIsLogining;
                             if (GUILayout.Button("", mGPlusButtonStyle, GUILayout.Height(statusBarHeight * 0.7f), GUILayout.Width(statusBarHeight * 1.6f)))
@@ -77,7 +78,7 @@ public class MainUI : MonoBehaviour
                                 GameUtils.Call("onSignInButtonClicked");
                             }
                             GUI.enabled = !GUIUtility.hasModalWindow;
-                        }
+					}
                         else
                         {
                             if (GUILayout.Button("<color=#498496><size=30>" + mTitle + "</size><size=16>的杰伦</size></color>", "titlelabel"))
@@ -87,6 +88,20 @@ public class MainUI : MonoBehaviour
                                 GameUtils.Call("onSignOutButtonClicked");
                             }
                         }
+					#elif UNITY_IOS
+						if (mTitle == "||aerror")
+						{
+							GUILayout.Label("<color=#498496><size=30>未登陆</size><size=16>(请在Game Center登录)</size></color>", "titlelabel");
+						}
+						else if (mTitle == "")
+                        {
+							GUILayout.Label("<color=#498496><size=30>正在登陆...</size></color>", "titlelabel");
+						}
+                        else
+                        {
+                            GUILayout.Label("<color=#498496><size=30>" + mTitle + "</size><size=16>的杰伦</size></color>", "titlelabel");
+                        }
+					#endif
 						//GUILayout.FlexibleSpace();
 					//}
 					//GUILayout.EndHorizontal();
@@ -162,6 +177,6 @@ public class MainUI : MonoBehaviour
     void onSignInSucceeded(string name)
     {
         mIsLogining = false;
-        mTitle = name;
+		SetTitle(mTitle);
     }
 }

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class StateWork : StateBase 
@@ -74,7 +74,7 @@ public class StateWork : StateBase
                     Weapon.getSingleton().onDestroyWeapon();
                 }
                 int money = CSVReader.getInt("work", mWorkType.ToString(), "money");
-                if (money == 0 || GUILayout.Button("�칤Ǯ\n$" + money, "graybutton"))
+                if (money == 0 || GUILayout.Button("领工钱\n$" + money, "graybutton"))
                 {
                     if (mWorkType == 2)
                     {
