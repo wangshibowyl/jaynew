@@ -13,6 +13,7 @@
 #import <OpenGLES/ES1/glext.h>
 #import <OpenGLES/ES2/glext.h>
 #import "MobClick.h"
+#import "WapsOffer/AppConnect.h"
 
 #include <mach/mach_time.h>
 
@@ -450,8 +451,49 @@ void UnityInitTrampoline()
 
     [MobClick startWithAppkey:UMENG_APPKEY];
     
+    //在程序的启动方法中加入(必须)：
+    [AppConnect getConnect:@"256f91ab8fb1b67b8278d4198a09a81f" pid:@ "appstore"];
+    //连接成功的回调方法(可选):
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onConnectSuccess:) name:WAPS_CONNECT_SUCCESS object:nil];
+    //连接失败的回调方法(可选):
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onConnectFailed:) name:WAPS_CONNECT_FAILED object:nil];
+    //从积分墙返回的事件回调方法（可选）:
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOfferClosed:) name:WAPS_OFFER_CLOSED object:nil];
+    
     return NO;
 }
+
+//连接成功处理:
+-(void)onConnectSuccess:(NSNotification*)notifyObj{ NSLog(@"连接成功"); }
+
+//连接失败处理:
+-(void)onConnectFailed:(NSNotification*)notifyObj{ NSLog(@"连接失败"); }
+
+-(void)onOfferClosed:(NSNotification*)notifyObj
+{
+    NSLog(@"Offer列表已关闭");
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUpdatedPoints:) name:WAPS_GET_POINTS_SUCCESS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getUpdatedPointsFailed:) name:WAPS_GET_POINTS_FAILED object:nil];
+    [AppConnect getPoints];
+}
+
+//获取积分成功处理方法:
+-(void)getUpdatedPoints:(NSNotification*)notifyObj
+{
+    WapsUserPoints *userPoints = notifyObj.object;
+    //NSString *pointsName=[userPoints getPointsName];
+    int pointsValue=[userPoints getPointsValue];
+    NSLog(@"获取%d积分",pointsValue);
+    if (pointsValue > 0)
+    {
+        [AppConnect spendPoints:pointsValue];
+        NSString *aString = [NSString stringWithFormat:@"%d", pointsValue];
+        const char* wz = [aString UTF8String];
+        UnitySendMessage("Main", "AddMoney", wz);
+    }
+}
+//获取积分失败处理方法:
+-(void)getUpdatedPointsFailed:(NSNotification*)notifyObj{ NSLog(@"获取积分失败"); }
 
 // For iOS 4
 // Callback order:

@@ -11,6 +11,7 @@
 #import <UIKit/UIApplication.h>
 
 #include "objc/runtime.h"
+#import "WapsOffer/AppConnect.h"
 
 static ScreenOrientation _curOrientation             = orientationUnknown;
 static ScreenOrientation _nativeRequestedOrientation = orientationUnknown;
@@ -285,5 +286,10 @@ extern "C"
     {
         UnityViewController *view = (UnityViewController *)_viewController;
         [view webFeedback];
+    }
+    
+    void _ChongZhi()
+    {
+        [AppConnect showOffers];
     }
 }

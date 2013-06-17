@@ -12,7 +12,7 @@
 @interface MainGLView : GLView {}
 @end
 
-@interface UnityViewController : UIViewController<UMFeedbackDataDelegate>
+@interface UnityViewController : UIViewController
 {
 }
 - (void)webFeedback;
