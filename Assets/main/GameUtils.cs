@@ -73,6 +73,10 @@ public class GameUtils
 		{
 			IOSUtils.Feedback();
 		}
+		else if (methodName == "chongzhi")
+		{
+			IOSUtils.ChongZhi();
+		}
     }
 #elif UNITY_ANDROID
     static private AndroidJavaObject mJavaObject;
