@@ -4,6 +4,7 @@
 /android/u3d
 /ios/Data
 /ios/Libraries
+/ios/*.png
 
 #################
 ## Eclipse
