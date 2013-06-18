@@ -52,43 +52,44 @@ public class MainUI : MonoBehaviour
 	}
 	
 	private void OnGUI()
-	{
-		GUI.skin = mSkin;
-		
+    {
+        GUI.skin = mSkin;
+        GUI.depth = 5;
+
         GUI.enabled = !GUIUtility.hasModalWindow;
 
-        GUI.Label(new Rect(0, 0, Screen.width, statusBarHeight+4),"","topbar");
+        GUI.Label(new Rect(0, 0, Screen.width, statusBarHeight + 4), "", "topbar");
         GUILayout.BeginArea(new Rect(0, 0, Screen.width, statusBarHeight));
-		{
+        {
             GUILayout.BeginHorizontal();
-			{
+            {
                 GUILayout.Space(10);
-				GUILayout.BeginVertical(GUILayout.Height(statusBarHeight),GUILayout.Width(Screen.width*0.5f));
-				{
+                GUILayout.BeginVertical(GUILayout.Height(statusBarHeight), GUILayout.Width(Screen.width * 0.5f));
+                {
                     GUILayout.FlexibleSpace();
-					//GUILayout.BeginHorizontal();
-					//{
-					#if UNITY_ANDROID
-					    if (mTitle == "")
+                    //GUILayout.BeginHorizontal();
+                    //{
+#if UNITY_ANDROID
+                    if (mTitle == "")
+                    {
+                        GUI.enabled = !mIsLogining;
+                        if (GUILayout.Button("", mGPlusButtonStyle, GUILayout.Height(statusBarHeight * 0.7f), GUILayout.Width(statusBarHeight * 1.6f)))
                         {
-                            GUI.enabled = !mIsLogining;
-                            if (GUILayout.Button("", mGPlusButtonStyle, GUILayout.Height(statusBarHeight * 0.7f), GUILayout.Width(statusBarHeight * 1.6f)))
-                            {
-                                mIsLogining = true;
-                                GameUtils.Call("onSignInButtonClicked");
-                            }
-                            GUI.enabled = !GUIUtility.hasModalWindow;
-					}
-                        else
-                        {
-                            if (GUILayout.Button("<color=#498496><size=30>" + mTitle + "</size><size=16>的杰伦</size></color>", "titlelabel"))
-                            {
-                                mTitle = "";
-                                mIsLogining = false;
-                                GameUtils.Call("onSignOutButtonClicked");
-                            }
+                            mIsLogining = true;
+                            GameUtils.Call("onSignInButtonClicked");
                         }
-					#elif UNITY_IOS
+                        GUI.enabled = !GUIUtility.hasModalWindow;
+                    }
+                    else
+                    {
+                        if (GUILayout.Button("<color=#498496><size=30>" + mTitle + "</size><size=16>的杰伦</size></color>", "titlelabel"))
+                        {
+                            mTitle = "";
+                            mIsLogining = false;
+                            GameUtils.Call("onSignOutButtonClicked");
+                        }
+                    }
+#elif UNITY_IOS
 						if (mTitle == "||aerror")
 						{
 							GUILayout.Label("<color=#498496><size=30>未登陆</size><size=16>(请在Game Center登录)</size></color>", "titlelabel");
@@ -101,62 +102,62 @@ public class MainUI : MonoBehaviour
                         {
                             GUILayout.Label("<color=#498496><size=30>" + mTitle + "</size><size=16>的杰伦</size></color>", "titlelabel");
                         }
-					#endif
-						//GUILayout.FlexibleSpace();
-					//}
-					//GUILayout.EndHorizontal();
-					StateInfo.getSingleton().stateExp.Progress();
-				}
-				GUILayout.EndVertical();
-				GUILayout.FlexibleSpace();
-				StateInfo.getSingleton().stateMoney.Progress();
+#endif
+                    //GUILayout.FlexibleSpace();
+                    //}
+                    //GUILayout.EndHorizontal();
+                    StateInfo.getSingleton().stateExp.Progress();
+                }
+                GUILayout.EndVertical();
+                GUILayout.FlexibleSpace();
+                StateInfo.getSingleton().stateMoney.Progress();
                 GUILayout.Space(10);
-			}
-			GUILayout.EndHorizontal();
-		}
-		GUILayout.EndArea();
-		
-		GUILayout.BeginArea(new Rect(10,statusBarHeight + 5,Screen.width*0.3f,350));
-		{
-			StateInfo.getSingleton().stateHealth.Progress();
-			StateInfo.getSingleton().stateHunger.Progress();
-			StateInfo.getSingleton().stateThirst.Progress();
-			StateInfo.getSingleton().statePower.Progress();
-            StateInfo.getSingleton().stateExp.levelIcon(new Rect(0,GUILayoutUtility.GetLastRect().yMax + 10,Screen.width*0.15f,Screen.width*0.15f));
-		}
-		GUILayout.EndArea();
+            }
+            GUILayout.EndHorizontal();
+        }
+        GUILayout.EndArea();
 
-        GUILayout.BeginArea(new Rect(Screen.width * 0.75f, statusBarHeight + 5, Screen.width * 0.25f-10, 100));
+        GUILayout.BeginArea(new Rect(10, statusBarHeight + 5, Screen.width * 0.3f, 350));
+        {
+            StateInfo.getSingleton().stateHealth.Progress();
+            StateInfo.getSingleton().stateHunger.Progress();
+            StateInfo.getSingleton().stateThirst.Progress();
+            StateInfo.getSingleton().statePower.Progress();
+            StateInfo.getSingleton().stateExp.levelIcon(new Rect(0, GUILayoutUtility.GetLastRect().yMax + 10, Screen.width * 0.15f, Screen.width * 0.15f));
+        }
+        GUILayout.EndArea();
+
+        GUILayout.BeginArea(new Rect(Screen.width * 0.75f, statusBarHeight + 5, Screen.width * 0.25f - 10, 100));
         {
             StateInfo.getSingleton().stateWork.Progress();
         }
         GUILayout.EndArea();
-		
-		GUILayout.BeginArea(new Rect(0,Screen.height*0.91f,Screen.width,Screen.height*0.09f));
-		{
-			GUILayout.BeginVertical("buttombar");
-			{
-				GUILayout.FlexibleSpace();
-				buttomBarSelect = GUILayout.Toolbar(buttomBarLastSelect,buttomBarLastSelect == -1 ?buttomBarNormalTexs : buttomBarTexs,"buttombarbtn");
-				if (buttomBarLastSelect != buttomBarSelect)
-				{
-					buttomBarLastSelect = buttomBarSelect;
-					for (int i=0;i!=buttomBarTexs.Length;++i)
-					{
-						buttomBarTexs[i] = buttomBarNormalTexs[i];
-					}
-					if (buttomBarSelect != -1)
-					{
-						buttomBarTexs[buttomBarSelect] = buttomBarSelectTexs[buttomBarSelect];
+
+        GUILayout.BeginArea(new Rect(0, Screen.height * 0.91f, Screen.width, Screen.height * 0.09f));
+        {
+            GUILayout.BeginVertical("buttombar");
+            {
+                GUILayout.FlexibleSpace();
+                buttomBarSelect = GUILayout.Toolbar(buttomBarLastSelect, buttomBarLastSelect == -1 ? buttomBarNormalTexs : buttomBarTexs, "buttombarbtn");
+                if (buttomBarLastSelect != buttomBarSelect)
+                {
+                    buttomBarLastSelect = buttomBarSelect;
+                    for (int i = 0; i != buttomBarTexs.Length; ++i)
+                    {
+                        buttomBarTexs[i] = buttomBarNormalTexs[i];
+                    }
+                    if (buttomBarSelect != -1)
+                    {
+                        buttomBarTexs[buttomBarSelect] = buttomBarSelectTexs[buttomBarSelect];
                         GetComponent<SubMenu>().showMenu(buttomBarSelect);
-					}
-				}
-				GUILayout.FlexibleSpace();
-			}
-			GUILayout.EndVertical();
-		}
-		GUILayout.EndArea();
-	}
+                    }
+                }
+                GUILayout.FlexibleSpace();
+            }
+            GUILayout.EndVertical();
+        }
+        GUILayout.EndArea();
+    }
 
     void SetJieBi(string money)
     {
@@ -177,6 +178,6 @@ public class MainUI : MonoBehaviour
     void onSignInSucceeded(string name)
     {
         mIsLogining = false;
-		SetTitle(mTitle);
+        SetTitle(name);
     }
 }

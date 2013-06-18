@@ -92,7 +92,7 @@ public class OperateObject : OperateBase
 			StateInfo.getSingleton().stateHunger.onValueChange(mHunger,true);
 			StateInfo.getSingleton().statePower.onValueChange(mPrower,true);
 			StateInfo.getSingleton().stateThirst.onValueChange(mThirst,true);
-            BodyTouch.getSingleton().mAnimator.SetBool(mAnim, true);
+            BodyTouch.getSingleton().GetAnimator().SetBool(mAnim, true);
             Weapon.getSingleton().changeWeapon(mWeapon,4.5f);
             Debug.Log("play anmi: "+mAnim);
             if (mName == "suannai")

@@ -3,17 +3,7 @@ using System.Collections;
 
 public class GameUtils 
 {
-#if UNITY_EDITOR1
-    static public void Call(string methodName, params string[] args)
-    {
-        string param = "";
-        foreach (object obj in args)
-        {
-            param += obj + ";";
-        }
-        Debug.Log(methodName + " " + param);
-    }
-#elif UNITY_IOS
+#if UNITY_IOS
 	static public void Call(string methodName, params string[] args)
     {
         if (methodName == "updateLeaderboard")
@@ -80,21 +70,26 @@ public class GameUtils
     }
 #elif UNITY_ANDROID
     static private AndroidJavaObject mJavaObject;
-    static public AndroidJavaObject getExtendObj()
-    {
-        if (mJavaObject == null)
-        {
-            AndroidJavaClass mJavaClass = new AndroidJavaClass("com.wangshibo.jaynew.jaynewNativeActivity");
-            mJavaObject = mJavaClass.GetStatic<AndroidJavaObject>("single");
-        }
-        return mJavaObject;
-    }
     static public void Call(string methodName,params string[] args)
     {
         if (mJavaObject == null)
         {
-            mJavaObject = getExtendObj();
+            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor)
+            {
+                string param = "";
+                foreach (object obj in args)
+                {
+                    param += obj + ";";
+                }
+                Debug.Log(methodName + " " + param);
+            }
+            else
+            {
+                AndroidJavaClass mJavaClass = new AndroidJavaClass("com.wangshibo.jaynew.jaynewNativeActivity");
+                mJavaObject = mJavaClass.GetStatic<AndroidJavaObject>("single");
+            }
         }
+
         if (mJavaObject != null)
         {
             mJavaObject.Call(methodName, args);

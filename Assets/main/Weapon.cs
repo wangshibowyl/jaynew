@@ -4,7 +4,7 @@ using System.Collections;
 public class Weapon : MonoBehaviour 
 {
     private static Weapon single;
-    private GameObject mWeaponObj;
+    public GameObject mWeaponObj;
 
     public static Weapon getSingleton()
     {
@@ -32,7 +32,7 @@ public class Weapon : MonoBehaviour
         Vector3 orgPosition = mWeaponObj.transform.localPosition;
         Quaternion orgRotation = mWeaponObj.transform.localRotation;
         Vector3 orgScale = mWeaponObj.transform.localScale;
-        mWeaponObj.transform.parent = BodyTouch.getSingleton().mWeaponPoint;
+        mWeaponObj.transform.parent = BodyTouch.getSingleton().mWeaponPoint.transform;
         mWeaponObj.transform.localPosition = orgPosition;
         mWeaponObj.transform.localRotation = orgRotation;
         mWeaponObj.transform.localScale = orgScale;

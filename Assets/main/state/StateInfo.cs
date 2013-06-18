@@ -55,6 +55,8 @@ public class StateInfo : MonoBehaviour
     {
 		mLevel = PlayerPrefs.GetInt("level", 0);
         mLastStateUpdateTime = new DateTime(long.Parse(PlayerPrefs.GetString("lastStateUpdateTime", "0")));
+
+        ChangeBody.getSingleton().LoadState();
 		
 		foreach(StateBase stateBase in mStateBases)
 		{
@@ -71,7 +73,6 @@ public class StateInfo : MonoBehaviour
 	private void SaveState()
     {
         PlayerPrefs.SetInt("level", mLevel);
-        PlayerPrefs.SetString("lastStateUpdateTime", mLastStateUpdateTime.Ticks.ToString());
 		
 		foreach(StateBase stateBase in mStateBases)
 		{
@@ -91,7 +92,7 @@ public class StateInfo : MonoBehaviour
 		GameSocial.Instance.ResetAchievements();
 #endif
         //needSaveState = true;
-		LoadState();
+        LoadState();
 	}
 	
 	private void OnApplicationFocus(bool focus)

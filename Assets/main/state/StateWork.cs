@@ -57,7 +57,7 @@ public class StateWork : StateBase
         mValue = 0;
         mMaxValue = CSVReader.getInt("work", id.ToString(), "time");
         mTitle = CSVReader.getString("work", id.ToString(), "title");
-        BodyTouch.getSingleton().mAnimator.SetInteger("workstate", mWorkType);
+        BodyTouch.getSingleton().GetAnimator().SetInteger("workstate", mWorkType);
         Weapon.getSingleton().onDestroyWeapon();
     }
 
@@ -70,7 +70,7 @@ public class StateWork : StateBase
                 if (isWorking)
                 {
                     isWorking = false;
-                    BodyTouch.getSingleton().mAnimator.SetInteger("workstate", -1);
+                    BodyTouch.getSingleton().GetAnimator().SetInteger("workstate", -1);
                     Weapon.getSingleton().onDestroyWeapon();
                 }
                 int money = CSVReader.getInt("work", mWorkType.ToString(), "money");

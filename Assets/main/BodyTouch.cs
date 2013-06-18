@@ -4,8 +4,8 @@ using System.Collections;
 public class BodyTouch : MonoBehaviour 
 {
     public string touchName;
-    public Animator mAnimator;
-    public Transform mWeaponPoint;
+    private Animator mAnimator;
+    public GameObject mWeaponPoint;
 
     private static BodyTouch single;
 
@@ -17,7 +17,18 @@ public class BodyTouch : MonoBehaviour
     private void Awake()
     {
         single = this;
+        mAnimator = GetComponent<Animator>();
     }
+
+    public Animator GetAnimator()
+    {
+        return mAnimator;
+    }
+
+    //public void OnAnimatorChange()
+    //{
+    //    mAnimator = ChangeBody.getSingleton().mCurrentBody.GetComponent<Animator>();
+    //}
 
 	void Update () 
     {
@@ -31,7 +42,7 @@ public class BodyTouch : MonoBehaviour
                 touchName = hit.transform.name;
             }
 #else
-            if (Input.GetMouseButton(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            if (Input.GetMouseButtonDown(0) && Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
             {
                 touchName = hit.transform.name;
             }
