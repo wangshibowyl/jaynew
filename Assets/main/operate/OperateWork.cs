@@ -40,9 +40,9 @@ public class OperateWork : OperateBase
         {
             MDialog.getSingleton().ShowSliderMessage((bBuy ? "" : ("体力不足,")) + "购买体力", "购买", () =>
             {
-                if (StateInfo.getSingleton().stateMoney.onValueChange(-10, true))
+                if (StateInfo.getSingleton().stateMoney.onValueChange(-MDialog.getSingleton().GetSliderCount(), true))
                 {
-                    StateInfo.getSingleton().statePower.onValueChange(10, true);
+                    StateInfo.getSingleton().statePower.onValueChange(MDialog.getSingleton().GetSliderCount(), true);
                 }
             }, (count) =>
             {

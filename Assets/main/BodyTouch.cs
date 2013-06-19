@@ -6,6 +6,8 @@ public class BodyTouch : MonoBehaviour
     public string touchName;
     private Animator mAnimator;
     public GameObject mWeaponPoint;
+    public int mAttachBegin;
+    public GameObject[] mAttachThings;
 
     private static BodyTouch single;
 

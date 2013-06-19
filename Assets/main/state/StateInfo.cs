@@ -66,8 +66,6 @@ public class StateInfo : MonoBehaviour
         //Lajis.loadState();
         //mJayState = PlayerPrefs.GetInt("mJayState", 0);
         GetStartState();
-        ThingWindow.getSingleton().loadThings();
-        Weapon.getSingleton().loadState();
     }
 	
 	private void SaveState()

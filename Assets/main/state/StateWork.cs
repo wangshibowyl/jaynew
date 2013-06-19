@@ -59,6 +59,8 @@ public class StateWork : StateBase
         mTitle = CSVReader.getString("work", id.ToString(), "title");
         BodyTouch.getSingleton().GetAnimator().SetInteger("workstate", mWorkType);
         Weapon.getSingleton().onDestroyWeapon();
+
+        SayPop.getSingleton().retGetCustomAd("0|领杰币|打工赚钱太累了,点击左上方按钮可以马上领取大量杰币!|50");
     }
 
     public override void Progress()

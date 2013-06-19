@@ -7,7 +7,7 @@ public class ChangeBody : MonoBehaviour
     public GameObject xiuxianPrefab;
     public GameObject longzhanPrefab;
     public GUISkin mSkin;
-    private bool mIsLongZhanState;
+    public bool mIsLongZhanState;
 
     private static ChangeBody single;
 
@@ -71,5 +71,7 @@ public class ChangeBody : MonoBehaviour
             mCurrentBody = Instantiate(longzhanPrefab) as GameObject;
         }
         StateInfo.getSingleton().stateWork.loadState();
+        ThingWindow.getSingleton().loadThings();
+        //Weapon.getSingleton().loadState();
     }
 }

@@ -8,7 +8,8 @@ public class ThingWindow : MonoBehaviour
     public GUIStyle mListStyle;
     public GUIStyle mImageStyle;
 
-    public GameObject[] mThings;
+    private GameObject[] mAttachThings;
+    private int mAttachBegin;
 
     private string mTitle;
     private float mProgress;
@@ -33,11 +34,13 @@ public class ThingWindow : MonoBehaviour
     {
         mBuyThingFlag = PlayerPrefs.GetInt("mBuyThingFlag", 0);
         mUseThingFlag = PlayerPrefs.GetInt("mUseThingFlag", 0);
-        for (int i=0;i != mThings.Length;++i)
+        mAttachThings = BodyTouch.getSingleton().mAttachThings;
+        mAttachBegin = BodyTouch.getSingleton().mAttachBegin;
+        for (int i = 0; i != mAttachThings.Length; ++i)
         {
-            if (mThings[i])
+            if (mAttachThings[i])
             {
-                mThings[i].renderer.enabled = (mUseThingFlag & (1 << i)) != 0;
+                mAttachThings[i].renderer.enabled = (mUseThingFlag & (1 << (i + mAttachBegin))) != 0;
             }
         }
     }
@@ -191,9 +194,9 @@ public class ThingWindow : MonoBehaviour
             mUseThingFlag &= ~(1 << id);
         }
         PlayerPrefs.SetInt("mUseThingFlag", mUseThingFlag);
-        if (mThings[id])
+        if (id - mAttachBegin >= 0 && mAttachThings[id - mAttachBegin])
         {
-            mThings[id].renderer.enabled = bUse;
+            mAttachThings[id - mAttachBegin].renderer.enabled = bUse;
         }
     }
 }

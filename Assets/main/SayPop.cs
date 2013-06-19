@@ -36,7 +36,7 @@ public class SayPop : MonoBehaviour
 #endif
     }
 
-    void retGetCustomAd(string str)
+    public void retGetCustomAd(string str)
     {
         if (str != "")
         {
@@ -63,14 +63,25 @@ public class SayPop : MonoBehaviour
                     GUILayout.Label("<color=black>" + mAdStr[2] + "</color>");
                 }
                 GUILayout.EndVertical();
-                if (GUILayout.Button("详情", "graybutton"))
+                if (mAdStr[0] == "0")
+                {
+                    if (GUILayout.Button("领杰币", "graybutton"))
+                    {
+                        GameUtils.Call("chongzhi");
+                        closePop();
+                    }
+                }
+                else if (GUILayout.Button("详情", "graybutton"))
                 {
                     GameUtils.Call("getCustomAdDesc", mAdStr[0]);
                     closePop();
                 }
             }
             GUILayout.EndHorizontal();
-            GUILayout.Label("<color=black>主人,安装" + mAdStr[1] + "就能获得" + mAdStr[3] + "杰币!</color>");
+            if (mAdStr[0] != "0")
+            {
+                GUILayout.Label("<color=black>主人,安装" + mAdStr[1] + "就能获得" + mAdStr[3] + "杰币!</color>");
+            }
         }
         GUILayout.EndArea();
     }

@@ -1,8 +1,8 @@
 ﻿id	title	power	time	money	exp	weapon
-0	刷盘子	10	4	50	10	panzi
-1	挖煤	50	12	250	30	chanzi
-2	扫大街	30	24	300	30	saoba
-3	伴舞	20	8	150	20	0
-4	街头卖唱	15	6	100	10	huatong
-5	搬砖	70	36	450	50	banzhuan
+0	刷盘子	10	4	40	10	panzi
+1	挖煤	50	12	200	30	chanzi
+2	扫大街	30	24	250	30	saoba
+3	伴舞	20	8	100	20	0
+4	街头卖唱	15	6	80	10	huatong
+5	搬砖	70	36	350	50	banzhuan
 20	睡觉	0	24	0	0	0
